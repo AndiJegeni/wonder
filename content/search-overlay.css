@@ -1,0 +1,529 @@
+.wonder-search-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: transparent;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  z-index: 999999;
+  pointer-events: none;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+}
+
+/* Global selection styles */
+.wonder-search-overlay *::selection {
+  background-color: rgba(255, 175, 255, 0.5);
+}
+
+.wonder-search-overlay *::-moz-selection {
+  background-color: rgba(255, 175, 255, 0.5);
+}
+
+/* Global scrollbar styles */
+.wonder-search-overlay * {
+  scrollbar-width: thin;
+  scrollbar-color: #ECECEC transparent;
+}
+
+.wonder-search-overlay *::-webkit-scrollbar {
+  width: 4px;
+}
+
+.wonder-search-overlay *::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.wonder-search-overlay *::-webkit-scrollbar-thumb {
+  background: #ECECEC;
+  border-radius: 4px;
+}
+
+.wonder-search-container {
+  width: 640px;
+  max-width: 90%;
+  position: fixed;
+  top: 80px;
+  left: 50%;
+  transform: translate(-50%, 0);
+  pointer-events: auto;
+  background: none;
+  will-change: transform; /* Optimize animations */
+}
+
+.wonder-search-container.has-results {
+  background: #FFFFFF;
+  box-shadow: 0px 8px 24px rgba(0, 0, 0, 0.12);
+  border-radius: 8px;
+}
+
+.wonder-search-results {
+  background: #FFFFFF;
+  padding: 12px 16px;
+  color: #2C2C2C;
+  font-size: 16px;
+  line-height: 24px;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  user-select: text;
+  cursor: auto;
+  max-height: 400px;
+  font-family: 'Inter', sans-serif;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 8px 8px 0 0;
+}
+
+.wonder-search-results-content {
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.wonder-search-input-section {
+  background: #FFFFFF;
+  border-radius: 8px;
+  padding: 12px;
+  display: flex;
+  align-items: flex-start;
+  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.08);
+  cursor: move;
+  user-select: none;
+  border: 1px solid #d9d9d9;
+  width: 100%;
+  gap: 8px;
+  min-height: 48px;
+  transition: all 0.2s ease-in-out 0.4s; 
+}
+
+.wonder-search-input-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.wonder-search-input-wrap {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  width: 100%;
+}
+
+.wonder-search-textarea-container {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-width: 0;
+}
+
+.wonder-search-input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  color: #2C2C2C;
+  font-size: 16px;
+  outline: none;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+  padding: 2px 8px 0 0;
+  line-height: 24px;
+  margin: 0;
+  min-height: 24px;
+  height: 24px;
+  max-height: 96px;
+  cursor: text;
+  word-wrap: break-word;
+  white-space: pre-wrap;
+  overflow-wrap: break-word;
+  overflow-y: hidden;
+  resize: none;
+  display: block;
+  width: 100%;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  vertical-align: top;
+  transform-origin: top;
+}
+
+.wonder-search-input::-webkit-scrollbar {
+  display: none;
+}
+
+/* Webkit scrollbar styles */
+.wonder-search-input::-webkit-scrollbar {
+  width: 4px;
+}
+
+.wonder-search-input::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.wonder-search-input::-webkit-scrollbar-thumb {
+  background: #858585;
+  border-radius: 4px;
+}
+
+/* Add selection color styles */
+.wonder-search-input::selection {
+  background-color: rgba(255, 175, 255, 0.5);
+}
+
+.wonder-search-input::-moz-selection {
+  background-color: rgba(255, 175, 255, 0.5);
+}
+
+.wonder-search-input::placeholder {
+  color: #858585;
+  opacity: 0.7;
+}
+
+.wonder-search-query {
+  color: #858585;
+  font-size: 14px;
+  margin-bottom: 8px;
+  padding: 0;
+  opacity: 0.8;
+  flex-shrink: 0;
+  font-weight: 400;
+}
+
+.wonder-search-response {
+  color: #2C2C2C;
+  font-size: 16px;
+  line-height: 24px;
+  max-height: calc(8 * 24px);
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: #ECECEC transparent;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+  letter-spacing: -0.01em;
+  font-weight: 400;
+}
+
+.wonder-search-loading {
+  width: 28px;
+  height: 28px;
+  margin-right: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.wonder-search-loading::after {
+  content: '';
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: #7F7F7F;
+  animation: loadingPulse 1.4s ease-in-out infinite;
+}
+
+.wonder-search-loading::before {
+  content: '';
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: #7F7F7F;
+  animation: loadingPulse 1.4s ease-in-out infinite;
+  animation-delay: 0.2s;
+  left: 8px;
+}
+
+.wonder-search-loading span {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: #7F7F7F;
+  animation: loadingPulse 1.4s ease-in-out infinite;
+  animation-delay: 0.4s;
+  left: 16px;
+}
+
+@keyframes loadingPulse {
+  0% {
+    opacity: 0.2;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.2;
+  }
+}
+
+.wonder-search-result-item {
+  padding: 8px;
+  border-radius: 8px;
+  transition: background-color 0.2s;
+  cursor: pointer;
+}
+
+.wonder-search-result-item:hover {
+  background: rgba(0, 0, 0, 0.05);
+}
+
+.wonder-search-result-item + .wonder-search-result-item {
+  margin-top: 4px;
+}
+
+.wonder-search-result-title {
+  font-weight: 500;
+  margin-bottom: 4px;
+}
+
+.wonder-search-result-description {
+  color: #858585;
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+/* Animation for appearing */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -10px);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+}
+
+.wonder-search-container {
+  animation: fadeIn 0.2s ease-out forwards;
+}
+
+.wonder-search-icons {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: auto; /* Push icons to bottom of container */
+}
+
+.wonder-search-left-icons {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.wonder-search-right-icons {
+  margin-left: auto;
+}
+
+.wonder-plus-icon,
+.wonder-smallchat-icon,
+.wonder-voice-icon {
+  width: 20px;
+  height: 20px;
+  opacity: 0.6;
+  transition: opacity 0.2s ease;
+}
+
+.wonder-plus-icon:hover,
+.wonder-smallchat-icon:hover,
+.wonder-voice-icon:hover {
+  opacity: 1;
+}
+
+.wonder-plus-icon path,
+.wonder-smallchat-icon path,
+.wonder-voice-icon path {
+  stroke: #2C2C2C;
+  transition: stroke 0.2s ease;
+}
+
+.wonder-search-input-section.has-context {
+  border-radius: 12px;
+  padding-bottom: 12px;
+}
+
+/* New approach: create a flex container with vertical flow */
+.wonder-search-context-display {
+  position: static;
+  width: fit-content;
+  max-width: 100%;
+  background: #F5F5F5;
+  border-radius: 2px;
+  padding: 4px;
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 8px;
+  margin-top: 8px;
+  margin-left: 0;
+  z-index: 1;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  white-space: nowrap;
+  pointer-events: auto;
+}
+
+.wonder-search-context-display::-webkit-scrollbar {
+  display: none;
+}
+
+.wonder-search-context-item {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  position: relative;
+  padding: 2px;
+  border-radius: 2px;
+}
+
+.wonder-search-context-item:hover .wonder-search-context-preview {
+  display: none;
+}
+
+.wonder-search-context-item:hover .wonder-search-context-remove {
+  display: flex;
+}
+
+.wonder-search-context-preview {
+  width: 16px;
+  height: 16px;
+  border-radius: 2px;
+  background: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.wonder-search-context-preview img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.wonder-search-context-remove {
+  display: none;
+  width: 16px;
+  height: 16px;
+  border-radius: 2px;
+  background: #F5F5F5;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+}
+
+.wonder-search-context-remove img {
+  width: 12px;
+  height: 12px;
+  filter: invert(50%) sepia(0%) saturate(0%) hue-rotate(143deg) brightness(96%) contrast(93%);
+}
+
+.wonder-search-context-name {
+  font-size: 12px;
+  color: #858585;
+  max-width: 120px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Add a new rule to control the border specifically */
+.wonder-search-container.has-results .wonder-search-results {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.wonder-search-container.has-results .wonder-search-input-section {
+  border-radius: 0 0 8px 8px;
+  box-shadow: none;
+  border-top: none;
+}
+
+.wonder-search-input-section.has-context .wonder-search-input {
+  min-height: 24px;
+}
+
+.wonder-search-actions {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 8px;
+  margin-top: 0;
+  min-height: 24px;
+  justify-content: space-between;
+}
+
+.wonder-search-left-actions {
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+  align-items: center;
+}
+
+.wonder-search-right-actions {
+  display: flex;
+  align-items: center;
+}
+
+.wonder-search-send-circle {
+  width: 32px;
+  height: 32px;
+  min-width: 32px;
+  background: #FFAFFF;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  margin-left: 4px;
+  margin-top: -2px;
+}
+
+.wonder-search-send-circle img {
+  width: 20px;
+  height: 20px;
+  filter: brightness(0) invert(1);
+  transform: rotate(-90deg);
+}
+
+.wonder-action-icon {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  opacity: 0.6;
+  transition: opacity 0.2s ease;
+}
+
+.wonder-action-icon:hover {
+  opacity: 1;
+}
+
+.wonder-search-container.is-dragging {
+  opacity: 0.98;
+  transition: none;
+  transform: none;
+}
+
+.wonder-search-container.is-dragging .wonder-search-input-section {
+  cursor: move;
+}
+
+.wonder-search-container.is-dragging .wonder-search-input,
+.wonder-search-container.is-dragging .wonder-search-icons {
+  pointer-events: none;
+}
+
+/* Add new class for three or more lines */
+.wonder-search-input-container.three-lines {
+  min-height: auto;
+  gap: 8px;
+}
+
+.wonder-search-input-container.three-lines .wonder-search-icons {
+  margin-top: 0;
+} 

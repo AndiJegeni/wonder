@@ -1,0 +1,70 @@
+{
+  "manifest_version": 3,
+  "default_locale": "en",
+  "name": "__MSG_extensionName__",
+  "version": "0.1.0",
+  "description": "__MSG_extensionDescription__",
+  "host_permissions": [
+    "<all_urls>"
+  ],
+  "permissions": [
+    "storage",
+    "scripting",
+    "tabs",
+    "activeTab",
+    "debugger",
+    "contextMenus",
+    "windows",
+    "notifications",
+    "sidePanel"
+  ],
+  "options_page": "options/index.html",
+  "background": {
+    "service_worker": "background.iife.js",
+    "type": "module"
+  },
+  "action": {
+    "default_icon": "icon-32.png"
+  },
+  "icons": {
+    "128": "icon-128.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*",
+        "<all_urls>"
+      ],
+      "js": [
+        "content/index.iife.js"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "*.js",
+        "*.css",
+        "*.svg",
+        "icon-128.png",
+        "icon-32.png"
+      ],
+      "matches": [
+        "*://*/*"
+      ]
+    }
+  ],
+  "commands": {
+    "toggle_search": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+K",
+        "mac": "Command+Shift+K"
+      },
+      "description": "Open small chat overlay"
+    }
+  },
+  "side_panel": {
+    "default_path": "side-panel/index.html"
+  }
+}
