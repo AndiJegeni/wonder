@@ -11,6 +11,7 @@ Step 1: Open Extensions Page
 <img width="947" height="542" alt="Screenshot 2025-07-12 at 5 16 06 PM" src="https://github.com/user-attachments/assets/1fec7df6-cf37-4f84-bcce-b5b0b56d5e3e" />
 Step 2: Enable Developer Mode
 <img width="892" height="288" alt="Screenshot 2025-07-12 at 5 16 39 PM" src="https://github.com/user-attachments/assets/47d3e8b8-cf5a-4b7f-b766-94723fe1de07" />
+
 Step 3: Click load unpacked and select the folder
 <img width="608" height="397" alt="Screenshot 2025-07-12 at 5 16 58 PM" src="https://github.com/user-attachments/assets/394a1c4a-0453-431a-8e0b-a7e7877cc8f7" />
 
